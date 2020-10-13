@@ -1,4 +1,5 @@
 package com.company;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Player {
@@ -6,8 +7,9 @@ public class Player {
     public String playerName;
     public int money;
 
-
     static ArrayList<Player> playerList = new ArrayList<>();
+    ArrayList<Animals> animalList = new ArrayList<>();
+    ArrayList<Food> foodList = new ArrayList<>();
     static Player player;
 
     static void setPlayers() {

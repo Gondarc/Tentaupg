@@ -25,7 +25,7 @@ public class Game {
             }
             else{
                 rounds = (minRound ) + (int)(Math.random()* ( maxRound - minRound + 1));
-                System.out.println(" - Okey. We're playing " + rounds + " rounds!");
+                System.out.println(" - Okay. We're playing " + rounds + " rounds!");
             }
         }
     }
@@ -66,7 +66,7 @@ public class Game {
             }
 
         }
-
-        System.out.println(Player.playerList.get(0).playerName + ": " + Player.playerList.get(0).money + "Kr.");
+//        System.out.println(Player.playerList.get(0).playerName + ": " + Player.playerList.get(0).money + "Kr.");
+        displayAllPlayers();
     }
 }
