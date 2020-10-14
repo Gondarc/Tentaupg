@@ -8,10 +8,15 @@ public class Store {
     String buyFood;
 
     static void sellAnimal(Player player){
-
         for (var animal: player.animalList){
             System.out.println(animal.name + " " + animal.gender);
-//            Dialogs.promptInt("Which animal do you wanna sell?", 1,player.animalList.size());
+        }
+        var sellIndex = Dialogs.promptInt("Which animal do you want to sell?",1,player.animalList.size());
+        player.animalList.remove(sellIndex - 1);
+        var playerChoice = Dialogs.promptInt("Do you wanna sell another animal? (1) yes (2) no", 1,2);
+        switch (playerChoice){
+            case 1: sellAnimal(player);
+            case 2: break;
         }
     }
     static void buyFood(Player player) {
@@ -28,8 +33,11 @@ public class Store {
                         case 2:
                             break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
+                break;
             case 2:
                 if (player.money >= Meat.cost) {
                     player.foodList.add(Meat.createMeat());
@@ -40,8 +48,11 @@ public class Store {
                         case 2:
                             break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
+                break;
             case 3:
                 if (player.money >= Wheat.cost) {
                     player.foodList.add(Wheat.createWheat());
@@ -52,8 +63,11 @@ public class Store {
                         case 2:
                             break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
+                break;
         }
     }
     static void buyAnimal(Player player){
@@ -73,8 +87,10 @@ public class Store {
                         case 1: buyAnimal(player);
                         case 2: break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
                 break;
             case 2:
                 if (player.money >= Chicken.cost) {
@@ -84,47 +100,49 @@ public class Store {
                         case 1: buyAnimal(player);
                         case 2: break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
                 break;
             case 3:
                 if (player.money >= Moose.cost) {
                     player.animalList.add(Moose.createMoose());
                     player.money -= Moose.cost;
                     switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyAnimal(player);
-                        case 2:
-                            break;
+                        case 1: buyAnimal(player);
+                        case 2: break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
                 break;
             case 4:
                 if (player.money >= Crocodile.cost) {
                     player.animalList.add(Crocodile.createCrocodile());
                     player.money -= Crocodile.cost;
                     switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyAnimal(player);
-                        case 2:
-                            break;
+                        case 1: buyAnimal(player);
+                        case 2: break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
                 break;
             case 5:
                 if (player.money >= Bear.cost) {
                     player.animalList.add(Bear.createBear());
                     player.money -= Bear.cost;
                     switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyAnimal(player);
-                        case 2:
-                            break;
+                        case 1: buyAnimal(player);
+                        case 2: break;
                     }
-                } else System.out.println("Not enough money, maybe sell an animal?");
-                whatToDO(player);
+                } else {
+                    System.out.println("Not enough money, maybe sell an animal?");
+                    whatToDO(player);
+                }
                 break;
         }
     }

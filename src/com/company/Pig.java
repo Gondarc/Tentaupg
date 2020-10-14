@@ -5,7 +5,7 @@ public class Pig extends Animals {
     static int cost = 50;
     static Pig createPig(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Name your pig and set it's gender!");
+        System.out.println("Name your pig and set it's gender! (Both followed by ENTER)");
         return new Pig(scanner.next(), scanner.next(),100,50);
     }
     public Pig(String name, String gender, int health, int price) {
