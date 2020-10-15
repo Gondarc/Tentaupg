@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Crocodile extends Animals{
+public class Crocodile extends Animal {
     static int cost = 100;
     static Crocodile createCrocodile(){
         Scanner scanner = new Scanner(System.in);

@@ -20,134 +20,58 @@ public class Store {
         }
     }
     static void buyFood(Player player) {
-        var foodTypes = "Sugar, meat, wheat".split(", ");
-        var foodNumber = Dialogs.promptInt(" - Buy -\n - (1) Sugar, (2) meat, (3) wheat", 1, 3);
-        switch (foodNumber) {
-            case 1:
-                if (player.money >= Sugar.cost) {
-                    player.foodList.add(Sugar.createSugar());
-                    player.money -= Sugar.cost;
-                    switch (Dialogs.promptInt(" - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyFood(player);
-                        case 2:
-                            break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 2:
-                if (player.money >= Meat.cost) {
-                    player.foodList.add(Meat.createMeat());
-                    player.money -= Meat.cost;
-                    switch (Dialogs.promptInt(" - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyFood(player);
-                        case 2:
-                            break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 3:
-                if (player.money >= Wheat.cost) {
-                    player.foodList.add(Wheat.createWheat());
-                    player.money -= Wheat.cost;
-                    switch (Dialogs.promptInt(" - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1:
-                            buyFood(player);
-                        case 2:
-                            break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
+        var foodNumber = Dialogs.promptInt(" - Buy - \n - (1) Sugar\n - (2) Meat\n - (3) Wheat", 1, 3);
+        int[] costs = {Sugar.cost, Meat.cost, Wheat.cost};
+        var cost = costs[foodNumber - 1];
+        if (player.money >= cost) {
+            Food newFood = null;
+            switch (foodNumber) {
+                case 1 -> newFood = Sugar.createSugar();
+                case 2 -> newFood = Meat.createMeat();
+                case 3 -> newFood = Wheat.createWheat();
+            }
+            player.money -= cost;
+            player.foodList.add(newFood);
+            if (Dialogs.promptInt(
+                    " - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
+                buyFood(player);
+            }
+        } else {
+            System.out.println("Not enough money, maybe sell an animal?");
+            whatToDO(player);
         }
     }
-    static void buyAnimal(Player player){
-        var animalTypes = "pig, chicken, moose, crocodile, near".split(", ");
-        var animalNumber = Dialogs.promptInt(" - Buy -\n - (1) Pig, (2) Chicken, (3) Moose (4) Crocodile (5) Bear", 1, 5);
-        /*var name = Dialogs.prompt("What is the name of your new " + animalTypes[animalNumber - 1] + "?");
-        var gender = Dialogs.promptChoice("What gender does " + name + " have?", "male", "female");
 
-         */
+    static void buyAnimal(Player player) {
+        var animalNumber = Dialogs.promptInt(" - Buy -\n" +
+                " - (1) Pig, (2) Chicken, (3) Moose (4) Crocodile (5) Bear", 1, 5);
 
-        switch (animalNumber){
-            case 1:
-                if (player.money >= Pig.cost){
-                    player.animalList.add(Pig.createPig());
-                    player.money -= Pig.cost;
-                    switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player",1,2)) {
-                        case 1: buyAnimal(player);
-                        case 2: break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 2:
-                if (player.money >= Chicken.cost) {
-                    player.animalList.add(Chicken.createChicken());
-                    player.money -= Chicken.cost;
-                    switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1: buyAnimal(player);
-                        case 2: break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 3:
-                if (player.money >= Moose.cost) {
-                    player.animalList.add(Moose.createMoose());
-                    player.money -= Moose.cost;
-                    switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1: buyAnimal(player);
-                        case 2: break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 4:
-                if (player.money >= Crocodile.cost) {
-                    player.animalList.add(Crocodile.createCrocodile());
-                    player.money -= Crocodile.cost;
-                    switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1: buyAnimal(player);
-                        case 2: break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
-            case 5:
-                if (player.money >= Bear.cost) {
-                    player.animalList.add(Bear.createBear());
-                    player.money -= Bear.cost;
-                    switch (Dialogs.promptInt(" - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
-                        case 1: buyAnimal(player);
-                        case 2: break;
-                    }
-                } else {
-                    System.out.println("Not enough money, maybe sell an animal?");
-                    whatToDO(player);
-                }
-                break;
+        int[] costs = {Pig.cost, Chicken.cost, Moose.cost, Crocodile.cost, Bear.cost};
+        var cost = costs[animalNumber - 1];
+        if (player.money >= cost) {
+            Animal newAnimal = null;
+            switch (animalNumber) {
+                case 1 -> newAnimal = Pig.createPig();
+                case 2 -> newAnimal = Chicken.createChicken();
+                case 3 -> newAnimal = Moose.createMoose();
+                case 4 -> newAnimal = Crocodile.createCrocodile();
+                case 5 -> newAnimal = Bear.createBear();
+            }
+            player.money -= cost;
+            player.animalList.add(newAnimal);
+            if(Dialogs.promptInt(
+                " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
+                buyAnimal(player);
+            }
+        }
+        else {
+            System.out.println("Not enough money, maybe sell an animal?");
+            whatToDO(player);
         }
     }
+
     static void whatToDO(Player player){
-        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal",1,3)){
+        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal",1,4)){
             case 1:
                 buyAnimal(player);
                 break;
@@ -156,6 +80,10 @@ public class Store {
                 break;
             case 3 :
                 sellAnimal(player);
+                break;
+            case 4:
+                //Animals.breedAnimal(player);                // lös detta sen bramski
+                break;
             default:
                 whatToDO(player);
         }

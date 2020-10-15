@@ -1,7 +1,7 @@
 package com.company;
 import java.util.*;
 
-public class Pig extends Animals {
+public class Pig extends Animal {
     static int cost = 50;
     static Pig createPig(){
         Scanner scanner = new Scanner(System.in);
