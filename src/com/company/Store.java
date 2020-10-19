@@ -8,9 +8,11 @@ public class Store {
     String buyFood;
 
     static void sellAnimal(Player player){
-        for (var animal: player.animalList){
-            System.out.println(animal.name + " " + animal.gender);
-        }
+            for (var animal : player.animalList) {
+                var animalIndex = player.animalList.indexOf(animal) + 1;
+                System.out.println("(" + animalIndex + ") "  + animal.name + " " + animal.gender);
+            }
+
         var sellIndex = Dialogs.promptInt("Which animal do you want to sell?",1,player.animalList.size());
         player.animalList.remove(sellIndex - 1);
         var playerChoice = Dialogs.promptInt("Do you wanna sell another animal? (1) yes (2) no", 1,2);
@@ -19,6 +21,7 @@ public class Store {
             case 2: break;
         }
     }
+
     static void buyFood(Player player) {
         var foodNumber = Dialogs.promptInt(" - Buy - \n - (1) Sugar\n - (2) Meat\n - (3) Wheat", 1, 3);
         int[] costs = {Sugar.cost, Meat.cost, Wheat.cost};
@@ -88,6 +91,7 @@ public class Store {
                 whatToDO(player);
         }
     }
+
     public Store(String buyAnimal, String sellAnimal, String buyFood){
         this.buyAnimal = buyAnimal;
         this.sellAnimal = sellAnimal;
