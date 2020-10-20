@@ -26,15 +26,25 @@ public class Store {
         var foodNumber = Dialogs.promptInt(" - Buy - \n - (1) Sugar\n - (2) Meat\n - (3) Wheat", 1, 3);
         int[] costs = {Sugar.cost, Meat.cost, Wheat.cost};
         var cost = costs[foodNumber - 1];
+        var maxFoodBuy = player.money / cost;
+        var foodAmount = Dialogs.promptInt(" - How many KG/amount of do you wish too buy?" +
+                "\n - Lowest amount (1KG), Highest amount (" + maxFoodBuy + "KG)", 1, maxFoodBuy);
+
         if (player.money >= cost) {
             Food newFood = null;
-            switch (foodNumber) {
-                case 1 -> newFood = Sugar.createSugar();
-                case 2 -> newFood = Meat.createMeat();
-                case 3 -> newFood = Wheat.createWheat();
-            }
-            player.money -= cost;
-            player.foodList.add(newFood);
+                switch (foodNumber) {
+                    case 1 -> {
+                        int i = 0;
+                        while (foodAmount > i){
+                            newFood = Sugar.createSugar();
+                            player.money -= cost;
+                            player.foodList.add(newFood);
+                            i++;
+                        }
+                    }
+                    case 2 -> newFood = Meat.createMeat();
+                    case 3 -> newFood = Wheat.createWheat();
+                }
             if (Dialogs.promptInt(
                     " - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
                 buyFood(player);
