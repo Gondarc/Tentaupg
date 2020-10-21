@@ -54,6 +54,12 @@ public class Game {
         //spela igen = samma spelare eller inte?
     }
 
+    private void decreaseAnimalHealth(Player player){
+        for (var animal : player.animalList) {
+
+        }
+    }
+
     public Game(){
         createPlayers();
         setRounds();
@@ -62,7 +68,7 @@ public class Game {
             for(var player: playerList){
                 System.out.println("\n\n\n\n - ROUND " + round + "/" + rounds);
                 System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
-                   Store.whatToDO(player);
+                Store.whatToDO(player);
             }
         }
 //        System.out.println(Player.playerList.get(0).playerName + ": " + Player.playerList.get(0).money + "Kr.");

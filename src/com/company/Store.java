@@ -7,19 +7,36 @@ public class Store {
     String sellAnimal;
     String buyFood;
 
-    static void sellAnimal(Player player){
-            for (var animal : player.animalList) {
-                var animalIndex = player.animalList.indexOf(animal) + 1;
-                System.out.println("(" + animalIndex + ") "  + animal.name + " " + animal.gender);
-            }
+    static void feedAnimal(){
 
+    }
+
+    static void animalStatus(Player player) {
+        System.out.println(" - " + player.playerName + "'s animals");
+        for (var animal : player.animalList) {
+            System.out.println(" - [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]\n");
+        }
+        whatToDO(player);
+    }
+
+    static void sellAnimal(Player player) {
+        System.out.println(" - Your animals");
+        for (var animal : player.animalList) {
+            var animalIndex = player.animalList.indexOf(animal) + 1;
+            System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: "
+                    + animal.health + "]\n(" + player.animalList.indexOf(animal) + 2 + ") Go back");
+            var sellIndex = Dialogs.promptInt("Which animal do you want to sell?", 1, player.animalList.size());
+            player.animalList.remove(sellIndex - 1);
+        }
+            /*
         var sellIndex = Dialogs.promptInt("Which animal do you want to sell?",1,player.animalList.size());
         player.animalList.remove(sellIndex - 1);
         var playerChoice = Dialogs.promptInt("Do you wanna sell another animal? (1) yes (2) no", 1,2);
         switch (playerChoice){
             case 1: sellAnimal(player);
             case 2: break;
-        }
+
+             */
     }
 
     static void buyFood(Player player) {
@@ -70,7 +87,7 @@ public class Store {
     }
 
     static void buyAnimal(Player player) {
-        var animalNumber = Dialogs.promptInt(" - Buy -\n" +
+        var animalNumber = Dialogs.promptInt("\n - Buy -\n" +
                 " - (1) Pig, (2) Chicken, (3) Moose (4) Crocodile (5) Bear", 1, 5);
 
         int[] costs = {Pig.cost, Chicken.cost, Moose.cost, Crocodile.cost, Bear.cost};
@@ -98,7 +115,8 @@ public class Store {
     }
 
     static void whatToDO(Player player){
-        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n",1,4)){
+        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n" +
+                " - (5) Your animal status",1,5)){
             case 1:
                 buyAnimal(player);
                 break;
@@ -111,6 +129,8 @@ public class Store {
             case 4:
                 //Animals.breedAnimal(player);                // lös detta sen bramski
                 break;
+            case 5:
+                Store.animalStatus(player);
             default:
                 whatToDO(player);
         }
