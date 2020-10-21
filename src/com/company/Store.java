@@ -27,14 +27,13 @@ public class Store {
         int[] costs = {Sugar.cost, Meat.cost, Wheat.cost};
         var cost = costs[foodNumber - 1];
         var maxFoodBuy = player.money / cost;
-        var foodAmount = Dialogs.promptInt(" - How many KG/amount of do you wish too buy?" +
-                "\n - Lowest amount (1KG), Highest amount (" + maxFoodBuy + "KG)", 1, maxFoodBuy);
-
         if (player.money >= cost) {
+        var foodAmount = Dialogs.promptInt(" - How many KG/amount of do you wish too buy?" +
+                "\n - Lowest amount (1KG), Highest amount (" + maxFoodBuy + "KG), (0) Go back", 1, maxFoodBuy);
+            int i = 0;
             Food newFood = null;
                 switch (foodNumber) {
                     case 1 -> {
-                        int i = 0;
                         while (foodAmount > i){
                             newFood = Sugar.createSugar();
                             player.money -= cost;
@@ -42,8 +41,22 @@ public class Store {
                             i++;
                         }
                     }
-                    case 2 -> newFood = Meat.createMeat();
-                    case 3 -> newFood = Wheat.createWheat();
+                    case 2 -> {
+                        while (foodAmount > i){
+                            newFood = Meat.createMeat();
+                            player.money -= cost;
+                            player.foodList.add(newFood);
+                            i++;
+                        }
+                    }
+                    case 3 -> {
+                        while (foodAmount > i){
+                            newFood = Wheat.createWheat();
+                            player.money -= cost;
+                            player.foodList.add(newFood);
+                            i++;
+                        }
+                    }
                 }
             if (Dialogs.promptInt(
                     " - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
@@ -51,6 +64,7 @@ public class Store {
             }
         } else {
             System.out.println("Not enough money, maybe sell an animal?");
+            System.out.println("You have " + player.money + " currency");
             whatToDO(player);
         }
     }
@@ -84,7 +98,7 @@ public class Store {
     }
 
     static void whatToDO(Player player){
-        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal",1,4)){
+        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n",1,4)){
             case 1:
                 buyAnimal(player);
                 break;

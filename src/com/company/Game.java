@@ -41,14 +41,27 @@ public class Game {
             }
         }
     }
+
+    private void playAgain(){
+        /*
+        var newGame = Dialogs.promptInt("Play again?", 1, 2);
+        switch (newGame){
+            case 1 -> Game;
+        }
+
+         */
+        //spela igen eller stäng spel
+        //spela igen = samma spelare eller inte?
+    }
+
     public Game(){
         createPlayers();
         setRounds();
         displayAllPlayers(); /* medot mest för att se att det funkar */
         for(var round = 1; round <= rounds; round++){
             for(var player: playerList){
-                System.out.println(" - ROUND " + round + "/" + rounds);
-                System.out.println(" - PLAYER: " + player.playerName);
+                System.out.println("\n\n\n\n - ROUND " + round + "/" + rounds);
+                System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
                    Store.whatToDO(player);
             }
         }
