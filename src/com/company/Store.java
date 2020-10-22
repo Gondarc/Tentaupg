@@ -7,15 +7,18 @@ public class Store {
     String sellAnimal;
     String buyFood;
 
-    static void feedAnimal(){
-
+    static void feedAnimal(Player player) {
+        Animal selectedAnimal = null;
+        Food selectedFood = null;
+        selectedAnimal.feed(selectedFood);
     }
 
     static void animalStatus(Player player) {
         System.out.println(" - " + player.playerName + "'s animals");
         for (var animal : player.animalList) {
-            System.out.println(" - [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]\n");
+            System.out.println(" - [" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
         }
+        System.out.println("");
         whatToDO(player);
     }
 
@@ -23,30 +26,21 @@ public class Store {
         System.out.println(" - Your animals");
         for (var animal : player.animalList) {
             var animalIndex = player.animalList.indexOf(animal) + 1;
-            System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: "
-                    + animal.health + "]\n(" + player.animalList.indexOf(animal) + 2 + ") Go back");
-            var sellIndex = Dialogs.promptInt("Which animal do you want to sell?", 1, player.animalList.size());
-            player.animalList.remove(sellIndex - 1);
+            System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
         }
-            /*
-        var sellIndex = Dialogs.promptInt("Which animal do you want to sell?",1,player.animalList.size());
+        var sellIndex = Dialogs.promptInt("Which animal do you want to sell?", 1, player.animalList.size());
         player.animalList.remove(sellIndex - 1);
-        var playerChoice = Dialogs.promptInt("Do you wanna sell another animal? (1) yes (2) no", 1,2);
-        switch (playerChoice){
-            case 1: sellAnimal(player);
-            case 2: break;
 
-             */
     }
 
     static void buyFood(Player player) {
-        var foodNumber = Dialogs.promptInt(" - Buy - \n - (1) Sugar\n - (2) Meat\n - (3) Wheat", 1, 3);
+        var foodNumber = Dialogs.promptInt(" - Buy - \n - (1) Sugar\n - (2) Meat\n - (3) Wheat\n", 1, 3);
         int[] costs = {Sugar.cost, Meat.cost, Wheat.cost};
         var cost = costs[foodNumber - 1];
         var maxFoodBuy = player.money / cost;
         if (player.money >= cost) {
         var foodAmount = Dialogs.promptInt(" - How many KG/amount of do you wish too buy?" +
-                "\n - Lowest amount (1KG), Highest amount (" + maxFoodBuy + "KG), (0) Go back", 1, maxFoodBuy);
+                "\n - Lowest amount (1KG), Highest amount (" + maxFoodBuy + "KG)", 1, maxFoodBuy);
             int i = 0;
             Food newFood = null;
                 switch (foodNumber) {
@@ -78,6 +72,8 @@ public class Store {
             if (Dialogs.promptInt(
                     " - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
                 buyFood(player);
+            } else {
+                System.out.println("FUNKY FRESH");
             }
         } else {
             System.out.println("Not enough money, maybe sell an animal?");
@@ -106,9 +102,10 @@ public class Store {
             if(Dialogs.promptInt(
                 " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
                 buyAnimal(player);
+            } else {
+                System.out.println("funky fresh");
             }
-        }
-        else {
+        } else {
             System.out.println("Not enough money, maybe sell an animal?");
             whatToDO(player);
         }
@@ -131,8 +128,6 @@ public class Store {
                 break;
             case 5:
                 Store.animalStatus(player);
-            default:
-                whatToDO(player);
         }
     }
 

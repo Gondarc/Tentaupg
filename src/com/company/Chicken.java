@@ -7,9 +7,9 @@ public class Chicken extends Animal {
     static Chicken createChicken(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name your hicken and set it's gender! (Both followed by ENTER)");
-        return new Chicken(scanner.next(), scanner.next(),100,25);
+        return new Chicken(scanner.next(), scanner.next(), "Chicken",100,25);
     }
-    public Chicken(String name, String gender, int health, int price) {
-        super(name, gender, health, price);
+    public Chicken(String name, String gender, String animalType, int health, int price) {
+        super(name, gender, animalType, health, price);
     }
 }

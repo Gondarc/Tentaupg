@@ -6,9 +6,9 @@ public class Pig extends Animal {
     static Pig createPig(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name your pig and set it's gender! (Both followed by ENTER)");
-        return new Pig(scanner.next(), scanner.next(),100,50);
+        return new Pig(scanner.next(), scanner.next(), "Pig",100,50);
     }
-    public Pig(String name, String gender, int health, int price) {
-        super(name, gender, health, price);
+    public Pig(String name, String gender, String animalType, int health, int price) {
+        super(name, gender,animalType, health, price);
     }
 }

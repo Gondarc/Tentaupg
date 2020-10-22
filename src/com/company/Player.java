@@ -13,4 +13,22 @@ public class Player {
         this.playerName = playerName;
         this.money = money;
     }
+
+    public void decreaseAnimalsHealth(){
+        var deadAnimals = new ArrayList<Animal>();
+        // Decrease the health for each of the players animal
+        // and remember which animals that dies after that
+        for(var animal : animalList){
+            animal.decreaseHealth();
+            if(animal.isDead()){ deadAnimals.add(animal); }
+        }
+        // Remove dead animals
+        if(deadAnimals.size() > 0){
+            System.out.println("Sorry " + playerName + ", these animals have died:");
+        }
+        for(var deadAnimal: deadAnimals){
+            animalList.remove(deadAnimal);
+            System.out.println(deadAnimal.name);
+        }
+    }
 }

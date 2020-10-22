@@ -17,11 +17,13 @@ public class Game {
             playerList.add(new Player(scanner.nextLine(), 1000));
         }
     }
+
     private void displayAllPlayers(){
         for (var player: playerList) {
             System.out.println(player.playerName);
         }
     }
+
     private void setRounds(){
         int minRound = 5;
         int maxRound = 30;
@@ -54,12 +56,6 @@ public class Game {
         //spela igen = samma spelare eller inte?
     }
 
-    private void decreaseAnimalHealth(Player player){
-        for (var animal : player.animalList) {
-
-        }
-    }
-
     public Game(){
         createPlayers();
         setRounds();
@@ -69,8 +65,8 @@ public class Game {
                 System.out.println("\n\n\n\n - ROUND " + round + "/" + rounds);
                 System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
                 Store.whatToDO(player);
+                player.decreaseAnimalsHealth();
             }
         }
-//        System.out.println(Player.playerList.get(0).playerName + ": " + Player.playerList.get(0).money + "Kr.");
     }
 }
