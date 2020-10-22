@@ -10,7 +10,46 @@ public class Store {
     static void feedAnimal(Player player) {
         Animal selectedAnimal = null;
         Food selectedFood = null;
-        selectedAnimal.feed(selectedFood);
+        int i = 0;
+        int j = 0;
+        System.out.println("Which animal do you wish too feed?");
+        for (var animal : player.animalList) {
+            System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+            i++;
+        }
+        selectedAnimal = player.animalList.get(scanner.nextInt());
+        System.out.println("which food do you wish to feed " + selectedAnimal.name + " with?");
+        for (var food : player.foodList) {
+            System.out.println(" - (" + j + ")[" + food.foodName + "]");
+            j++;
+        }
+
+        var foodPreferences = new HashMap<String, String>();
+        foodPreferences.put("Wheat", "Pig Chicken Moose Crocodile");
+        foodPreferences.put("Meat", "Bear Crocodile Pig");
+        foodPreferences.put("Sugar", "Bear Chicken Crocodile");
+
+        selectedFood = player.foodList.get(scanner.nextInt());
+
+        var animalsThatEatSelectedFood = foodPreferences.get(selectedFood.foodName);
+        if(animalsThatEatSelectedFood.contains(selectedAnimal.animalType)){
+            // yes the animal can eat the food
+            selectedAnimal.feed(selectedFood);
+            player.foodList.remove(selectedFood);
+            System.out.println("You fed" + selectedAnimal.name + " Health: " + selectedAnimal.health);
+            var question = Dialogs.promptInt("(1) Feed more, (2) Continue / Next round", 1, 2);
+            switch (question) {
+                case 1 -> feedAnimal(player);
+                default -> { return; }
+            }
+        }
+        else {
+            // no the animal can't eat the food
+            System.out.println("That animal can't eat that food.");
+            feedAnimal(player);
+            return;
+        }
+
     }
 
     static void animalStatus(Player player) {
@@ -113,21 +152,13 @@ public class Store {
 
     static void whatToDO(Player player){
         switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n" +
-                " - (5) Your animal status",1,5)){
-            case 1:
-                buyAnimal(player);
-                break;
-            case 2 :
-                buyFood(player);
-                break;
-            case 3 :
-                sellAnimal(player);
-                break;
-            case 4:
-                //Animals.breedAnimal(player);                // lös detta sen bramski
-                break;
-            case 5:
-                Store.animalStatus(player);
+                " - (5) Feed animal\n - (6) Your animal status",1,6)){
+            case 1 -> buyAnimal(player);
+            case 2 -> buyFood(player);
+            case 3 -> sellAnimal(player);
+            //case 4 -> //Animals.breedAnimal(player); // lös detta sen bramski
+            case 5 -> feedAnimal(player);
+            case 6 -> Store.animalStatus(player);
         }
     }
 
