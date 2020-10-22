@@ -16,6 +16,10 @@ public class Animal {
         this.price = price;
     }
 
+    public void breed(Player player){
+        int i = (1) + (int) (Math.random() * (8 - 1 + 1));
+    }
+
     public void feed(Food food){
         health += food.foodHealth;
         if (health > 100){ health = 100; }

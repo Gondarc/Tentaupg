@@ -7,6 +7,50 @@ public class Store {
     String sellAnimal;
     String buyFood;
 
+    static void breedAnimal(Player player){
+        Animal firstAnimal = null;
+        Animal secondAnimal = null;
+        Animal newAnimal = null;
+        int i = 0;
+        int j = 0;
+        System.out.println(" - Which animal do you wish too breed?");
+        for (var animal : player.animalList){
+            System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+            i++;
+        }
+        firstAnimal = player.animalList.get(scanner.nextInt());
+        System.out.println(" - Choose your second animal to breed " + firstAnimal.name + " with");
+        for (var animal : player.animalList){
+            System.out.println(" - (" + j + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+            j++;
+        }
+        /*
+        if (firstAnimal.animalType.equals(secondAnimal.animalType)){
+            player.animalList.add(newAnimal);
+        }
+
+         */
+        var breedPreferences = new HashMap<String, String>();
+        breedPreferences.put("Pig", "Pig");
+        breedPreferences.put("Chicken", "Chicken");
+        breedPreferences.put("Moose", "Moose");
+        breedPreferences.put("Crocodile", "Crocodile");
+        breedPreferences.put("Bear", "Bear");
+
+        secondAnimal = player.animalList.get(scanner.nextInt());
+
+        var animalsCanBreed = breedPreferences.get(firstAnimal.animalType);
+        if (animalsCanBreed.contains(secondAnimal.animalType)){
+            if (animalsCanBreed.contains("Pig")){
+                System.out.println("can breed");
+                newAnimal = Pig.breedPig();
+                player.animalList.add(newAnimal);
+            }
+        } else {
+            System.out.println("cant breed");
+        }
+    }
+
     static void feedAnimal(Player player) {
         Animal selectedAnimal = null;
         Food selectedFood = null;
@@ -49,7 +93,6 @@ public class Store {
             feedAnimal(player);
             return;
         }
-
     }
 
     static void animalStatus(Player player) {
@@ -69,7 +112,6 @@ public class Store {
         }
         var sellIndex = Dialogs.promptInt("Which animal do you want to sell?", 1, player.animalList.size());
         player.animalList.remove(sellIndex - 1);
-
     }
 
     static void buyFood(Player player) {
@@ -156,7 +198,7 @@ public class Store {
             case 1 -> buyAnimal(player);
             case 2 -> buyFood(player);
             case 3 -> sellAnimal(player);
-            //case 4 -> //Animals.breedAnimal(player); // lös detta sen bramski
+            case 4 -> breedAnimal(player);
             case 5 -> feedAnimal(player);
             case 6 -> Store.animalStatus(player);
         }
