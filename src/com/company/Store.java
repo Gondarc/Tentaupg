@@ -37,48 +37,74 @@ public class Store {
         breedPreferences.put("Moose", "Moose");
         breedPreferences.put("Crocodile", "Crocodile");
         breedPreferences.put("Bear", "Bear");
+        int breedSuccess = (1) + (int) (Math.random() * (2 - 1 + 1));
         var animalsCanBreed = breedPreferences.get(firstAnimal.animalType);
         secondAnimal = player.animalList.get(scanner.nextInt());
         if (firstAnimal != secondAnimal) {
             if (animalsCanBreed.contains(secondAnimal.animalType)) {
                 if (animalsCanBreed.contains("Pig")) {
-                    int randomNmb = (1) + (int) (Math.random() * (8 - 1 + 1));
-                    System.out.println("You got " + randomNmb + " new pigs");
-                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                        newAnimal = Pig.breedPig();
-                        player.animalList.add(newAnimal);
+                    if (breedSuccess == 1) {
+                        System.out.println(" - Breed success");
+                        int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
+                        System.out.println("You got " + randomNmb + " new pigs");
+                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                            newAnimal = Pig.breedPig();
+                            player.animalList.add(newAnimal);
+                        }
+                    } else {
+                        System.out.println(" - Unfortunately the breeding didn't succeed");
                     }
                 }
                 if (animalsCanBreed.contains("Chicken")) {
-                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
-                    System.out.println("You got " + randomNmb + " new chickens");
-                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                        newAnimal = Chicken.breedChicken();
-                        player.animalList.add(newAnimal);
+                    if (breedSuccess == 1) {
+                        System.out.println(" - Breed success");
+                        int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
+                        System.out.println("You got " + randomNmb + " new chickens");
+                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                            newAnimal = Chicken.breedChicken();
+                            player.animalList.add(newAnimal);
+                        }
+                    } else {
+                        System.out.println(" - Unfortunately the breeding didn't succeed");
                     }
                 }
                 if (animalsCanBreed.contains("Crocodile")) {
-                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
-                    System.out.println("You got " + randomNmb + " new crocodiles");
-                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                        newAnimal = Crocodile.breedCrocodile();
-                        player.animalList.add(newAnimal);
+                    if (breedSuccess == 1) {
+                        System.out.println(" - Breed success");
+                        int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
+                        System.out.println("You got " + randomNmb + " new crocodiles");
+                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                            newAnimal = Crocodile.breedCrocodile();
+                            player.animalList.add(newAnimal);
+                        }
+                    } else {
+                        System.out.println(" - Unfortunately the breeding didn't succeed");
                     }
                 }
                 if (animalsCanBreed.contains("Moose")) {
-                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
-                    System.out.println("You got " + randomNmb + " new moose");
-                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                        newAnimal = Moose.breedMoose();
-                        player.animalList.add(newAnimal);
+                    if (breedSuccess == 1) {
+                        System.out.println(" - Breed success");
+                        int randomNmb = (1) + (int) (Math.random() * (2 - 1 + 1));
+                        System.out.println("You got " + randomNmb + " new moose");
+                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                            newAnimal = Moose.breedMoose();
+                            player.animalList.add(newAnimal);
+                        }
+                    } else {
+                        System.out.println(" - Unfortunately the breeding didn't succeed");
                     }
                 }
                 if (animalsCanBreed.contains("Bear")) {
-                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
-                    System.out.println("You got " + randomNmb + " new bears");
-                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                        newAnimal = Bear.breedBear();
-                        player.animalList.add(newAnimal);
+                    if (breedSuccess == 1) {
+                        System.out.println(" - Breed success");
+                        int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
+                        System.out.println("You got " + randomNmb + " new bears");
+                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                            newAnimal = Bear.breedBear();
+                            player.animalList.add(newAnimal);
+                        }
+                    } else {
+                        System.out.println(" - Unfortunately the breeding didn't succeed");
                     }
                 }
             } else {
@@ -104,12 +130,12 @@ public class Store {
                     i++;
                 }
             } else {
-                System.out.println("You don't have any animals too feed");
-                System.out.println("You should rethink what you would want too do!");
+                System.out.println(" - You don't have any animals too feed");
+                System.out.println(" - You should rethink what you would want too do!");
             }
         } else {
-            System.out.println("You don't have any food so you cant feed any of your animals");
-            System.out.println("Rethink what you want too do!");
+            System.out.println(" - You don't have any food so you cant feed any of your animals");
+            System.out.println(" - Rethink what you want too do!");
             whatToDO(player);
         }
         selectedAnimal = player.animalList.get(scanner.nextInt());
@@ -148,11 +174,15 @@ public class Store {
     }
 
     static void animalStatus(Player player) {
-        System.out.println(" - " + player.playerName + "'s animals");
-        for (var animal : player.animalList) {
-            System.out.println(" - [" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+        if (player.animalList.size()!=0) {
+            System.out.println(" - " + player.playerName + "'s animals");
+            for (var animal : player.animalList) {
+                System.out.println(" - [" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+            }
+        } else {
+            System.out.println(" - You don't own any animals!");
+            System.out.println(" - Try too buy an animal and then use this feature!");
         }
-        System.out.println("");
         whatToDO(player);
     }
 
@@ -165,9 +195,13 @@ public class Store {
             }
             var sellIndex = Dialogs.promptInt(" - Which animal do you want to sell?", 1, player.animalList.size());
             player.animalList.remove(sellIndex - 1);
+            var sellMore = Dialogs.promptInt(" - Do you wish to sell more animals? (1) Sell more, (2) Continue", 1,2);
+            switch (sellMore){
+                case 1 -> sellAnimal(player);
+            }
         } else {
             System.out.println(" - You don't have any animals");
-            System.out.println(" - You might wanna buy some before trying to sell them!");
+            System.out.println(" - You might wanna buy some more before trying to sell them!");
             whatToDO(player);
         }
     }
@@ -221,7 +255,7 @@ public class Store {
 
     static void buyAnimal(Player player) {
         var animalNumber = Dialogs.promptInt("\n - Buy -\n" +
-                " - (1) Pig, (2) Chicken, (3) Moose (4) Crocodile (5) Bear", 1, 5);
+                " - (1) Pig, (2) Chicken, (3) Moose, (4) Crocodile, (5) Bear", 1, 5);
 
         int[] costs = {Pig.cost, Chicken.cost, Moose.cost, Crocodile.cost, Bear.cost};
         var cost = costs[animalNumber - 1];

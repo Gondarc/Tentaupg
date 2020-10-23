@@ -24,7 +24,7 @@ public class Player {
         }
         // Remove dead animals
         if(deadAnimals.size() > 0){
-            System.out.println("Sorry " + playerName + ", these animals have died:");
+            System.out.println("\nSorry " + playerName + ", these animals have died:");
         }
         for(var deadAnimal: deadAnimals){
             animalList.remove(deadAnimal);

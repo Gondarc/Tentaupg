@@ -12,9 +12,13 @@ public class Game {
         System.out.println(" - How many players will play?");
         System.out.println(" - Choose from 1, 2, 3 or 4.");
         int playerAmount = Integer.parseInt(scanner.nextLine());
-        for (int i = 1; i <= playerAmount; i++) {
-            System.out.println("Choose your name player!");
-            playerList.add(new Player(scanner.nextLine(), 1000));
+        if (playerAmount >= 1 & playerAmount <= 4) {
+            for (int i = 1; i <= playerAmount; i++) {
+                System.out.println("Choose your name player!");
+                playerList.add(new Player(scanner.nextLine(), 1000));
+            }
+        } else {
+            createPlayers();
         }
     }
 
@@ -62,7 +66,7 @@ public class Game {
         displayAllPlayers(); /* medot mest för att se att det funkar */
         for(var round = 1; round <= rounds; round++){
             for(var player: playerList){
-                System.out.println("\n\n\n\n - ROUND " + round + "/" + rounds);
+                System.out.println("\n - ROUND " + round + "/" + rounds);
                 System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
                 Store.whatToDO(player);
                 player.decreaseAnimalsHealth();
