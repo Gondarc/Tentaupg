@@ -194,6 +194,8 @@ public class Store {
                 System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
             }
             var sellIndex = Dialogs.promptInt(" - Which animal do you want to sell?", 1, player.animalList.size());
+            var animalWorth = (player.animalList.get(sellIndex -1).price * player.animalList.get(sellIndex -1).health) / 100;
+            player.money += animalWorth;
             player.animalList.remove(sellIndex - 1);
             var sellMore = Dialogs.promptInt(" - Do you wish to sell more animals? (1) Sell more, (2) Continue", 1,2);
             switch (sellMore){
