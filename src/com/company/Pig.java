@@ -8,6 +8,7 @@ public class Pig extends Animal {
         System.out.println("Name your pig and set it's gender! (Both followed by ENTER)");
         return new Pig(scanner.next(), scanner.next(), "Pig",100,50);
     }
+
     static Pig breedPig(){
         Scanner scanner = new Scanner(System.in);
         int i = (1) + (int) (Math.random() * (2 - 1 + 1));

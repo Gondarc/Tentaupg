@@ -7,47 +7,87 @@ public class Store {
     String sellAnimal;
     String buyFood;
 
-    static void breedAnimal(Player player){
+    static void breedAnimal(Player player) {
         Animal firstAnimal = null;
         Animal secondAnimal = null;
         Animal newAnimal = null;
         int i = 0;
         int j = 0;
+        if (player.animalList.size() >= 2) {
         System.out.println(" - Which animal do you wish too breed?");
-        for (var animal : player.animalList){
-            System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
-            i++;
+            for (var animal : player.animalList) {
+                System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+                i++;
+            }
+        } else {
+            System.out.println(" - You have less then 2 animals, which tells me you cant breed anything... yet!");
+            System.out.println(" - I recommend buying more animals so you can start breeding!");
+            whatToDO(player);
         }
         firstAnimal = player.animalList.get(scanner.nextInt());
         System.out.println(" - Choose your second animal to breed " + firstAnimal.name + " with");
-        for (var animal : player.animalList){
+        for (var animal : player.animalList) {
             System.out.println(" - (" + j + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
             j++;
         }
-        /*
-        if (firstAnimal.animalType.equals(secondAnimal.animalType)){
-            player.animalList.add(newAnimal);
-        }
 
-         */
         var breedPreferences = new HashMap<String, String>();
         breedPreferences.put("Pig", "Pig");
         breedPreferences.put("Chicken", "Chicken");
         breedPreferences.put("Moose", "Moose");
         breedPreferences.put("Crocodile", "Crocodile");
         breedPreferences.put("Bear", "Bear");
-
-        secondAnimal = player.animalList.get(scanner.nextInt());
-
         var animalsCanBreed = breedPreferences.get(firstAnimal.animalType);
-        if (animalsCanBreed.contains(secondAnimal.animalType)){
-            if (animalsCanBreed.contains("Pig")){
-                System.out.println("can breed");
-                newAnimal = Pig.breedPig();
-                player.animalList.add(newAnimal);
+        secondAnimal = player.animalList.get(scanner.nextInt());
+        if (firstAnimal != secondAnimal) {
+            if (animalsCanBreed.contains(secondAnimal.animalType)) {
+                if (animalsCanBreed.contains("Pig")) {
+                    int randomNmb = (1) + (int) (Math.random() * (8 - 1 + 1));
+                    System.out.println("You got " + randomNmb + " new pigs");
+                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                        newAnimal = Pig.breedPig();
+                        player.animalList.add(newAnimal);
+                    }
+                }
+                if (animalsCanBreed.contains("Chicken")) {
+                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
+                    System.out.println("You got " + randomNmb + " new chickens");
+                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                        newAnimal = Chicken.breedChicken();
+                        player.animalList.add(newAnimal);
+                    }
+                }
+                if (animalsCanBreed.contains("Crocodile")) {
+                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
+                    System.out.println("You got " + randomNmb + " new crocodiles");
+                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                        newAnimal = Crocodile.breedCrocodile();
+                        player.animalList.add(newAnimal);
+                    }
+                }
+                if (animalsCanBreed.contains("Moose")) {
+                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
+                    System.out.println("You got " + randomNmb + " new moose");
+                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                        newAnimal = Moose.breedMoose();
+                        player.animalList.add(newAnimal);
+                    }
+                }
+                if (animalsCanBreed.contains("Bear")) {
+                    int randomNmb = (1) + (int) (Math.random() * (4 - 1 + 1));
+                    System.out.println("You got " + randomNmb + " new bears");
+                    for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                        newAnimal = Bear.breedBear();
+                        player.animalList.add(newAnimal);
+                    }
+                }
+            } else {
+                System.out.println(" - You cant breed a " + firstAnimal.animalType + " with a " + secondAnimal.animalType);
+                breedAnimal(player);
             }
         } else {
-            System.out.println("cant breed");
+            System.out.println(" - You cant breed " + firstAnimal.name + " with " + secondAnimal.name);
+            breedAnimal(player);
         }
     }
 
@@ -56,10 +96,21 @@ public class Store {
         Food selectedFood = null;
         int i = 0;
         int j = 0;
-        System.out.println("Which animal do you wish too feed?");
-        for (var animal : player.animalList) {
-            System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
-            i++;
+        if (player.foodList.size() >= 1) {
+            if (player.animalList.size() >= 1) {
+                System.out.println("Which animal do you wish too feed?");
+                for (var animal : player.animalList) {
+                    System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+                    i++;
+                }
+            } else {
+                System.out.println("You don't have any animals too feed");
+                System.out.println("You should rethink what you would want too do!");
+            }
+        } else {
+            System.out.println("You don't have any food so you cant feed any of your animals");
+            System.out.println("Rethink what you want too do!");
+            whatToDO(player);
         }
         selectedAnimal = player.animalList.get(scanner.nextInt());
         System.out.println("which food do you wish to feed " + selectedAnimal.name + " with?");
@@ -76,7 +127,7 @@ public class Store {
         selectedFood = player.foodList.get(scanner.nextInt());
 
         var animalsThatEatSelectedFood = foodPreferences.get(selectedFood.foodName);
-        if(animalsThatEatSelectedFood.contains(selectedAnimal.animalType)){
+        if (animalsThatEatSelectedFood.contains(selectedAnimal.animalType)) {
             // yes the animal can eat the food
             selectedAnimal.feed(selectedFood);
             player.foodList.remove(selectedFood);
@@ -84,13 +135,14 @@ public class Store {
             var question = Dialogs.promptInt("(1) Feed more, (2) Continue / Next round", 1, 2);
             switch (question) {
                 case 1 -> feedAnimal(player);
-                default -> { return; }
+                default -> {
+                    return;
+                }
             }
-        }
-        else {
+        } else {
             // no the animal can't eat the food
             System.out.println("That animal can't eat that food.");
-            feedAnimal(player);
+            whatToDO(player);
             return;
         }
     }
@@ -105,13 +157,19 @@ public class Store {
     }
 
     static void sellAnimal(Player player) {
-        System.out.println(" - Your animals");
-        for (var animal : player.animalList) {
-            var animalIndex = player.animalList.indexOf(animal) + 1;
-            System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+        if (player.animalList.size() != 0) {
+            System.out.println(" - Your animals");
+            for (var animal : player.animalList) {
+                var animalIndex = player.animalList.indexOf(animal) + 1;
+                System.out.println("(" + animalIndex + ") [" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+            }
+            var sellIndex = Dialogs.promptInt(" - Which animal do you want to sell?", 1, player.animalList.size());
+            player.animalList.remove(sellIndex - 1);
+        } else {
+            System.out.println(" - You don't have any animals");
+            System.out.println(" - You might wanna buy some before trying to sell them!");
+            whatToDO(player);
         }
-        var sellIndex = Dialogs.promptInt("Which animal do you want to sell?", 1, player.animalList.size());
-        player.animalList.remove(sellIndex - 1);
     }
 
     static void buyFood(Player player) {
@@ -153,8 +211,6 @@ public class Store {
             if (Dialogs.promptInt(
                     " - Buy more food?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
                 buyFood(player);
-            } else {
-                System.out.println("FUNKY FRESH");
             }
         } else {
             System.out.println("Not enough money, maybe sell an animal?");
@@ -180,11 +236,9 @@ public class Store {
             }
             player.money -= cost;
             player.animalList.add(newAnimal);
-            if(Dialogs.promptInt(
-                " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2) == 1) {
-                buyAnimal(player);
-            } else {
-                System.out.println("funky fresh");
+            switch (Dialogs.promptInt(
+                    " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)){
+                case 1 -> buyAnimal(player);
             }
         } else {
             System.out.println("Not enough money, maybe sell an animal?");
@@ -193,7 +247,7 @@ public class Store {
     }
 
     static void whatToDO(Player player){
-        switch (Dialogs.promptInt(" - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n" +
+        switch (Dialogs.promptInt("\n - (1) Buy animal\n - (2) Buy food\n - (3) Sell animal\n - (4) Breed animal\n" +
                 " - (5) Feed animal\n - (6) Your animal status",1,6)){
             case 1 -> buyAnimal(player);
             case 2 -> buyFood(player);
