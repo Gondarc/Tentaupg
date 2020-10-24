@@ -14,10 +14,9 @@ public class Player {
         this.money = money;
     }
 
-    static void sellAll(Player player){
+    static void sellAllAnimals(Player player){
         for (var animal : player.animalList) {
             var animalWorth = (animal.price * animal.health) / 100;
-            System.out.println(animalWorth);
             player.money += animalWorth;
         }
     }

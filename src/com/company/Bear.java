@@ -7,7 +7,7 @@ public class Bear extends Animal {
     static Bear createBear(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name your bear and set it's gender! (Both followed by ENTER)");
-        return new Bear(scanner.next(), scanner.next(),  "Bear",100,85);
+        return new Bear(scanner.nextLine(), scanner.nextLine(),  "Bear",100,85);
     }
 
     static Bear breedBear(){

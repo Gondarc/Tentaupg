@@ -7,7 +7,7 @@ public class Moose extends Animal {
     static Moose createMoose(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name your moose and set it's gender! (Both followed by ENTER)");
-        return new Moose(scanner.next(), scanner.next(), "Moose" ,100,75);
+        return new Moose(scanner.nextLine(), scanner.nextLine(), "Moose" ,100,75);
     }
 
     static Moose breedMoose(){

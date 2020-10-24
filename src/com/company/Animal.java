@@ -9,6 +9,14 @@ public class Animal {
     int price;
 
     public Animal(String name, String gender, String animalType, int health, int price){
+
+        Scanner scanner = new Scanner(System.in);
+
+        while(!(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female"))) {
+            System.out.println("Must be male or female");
+            gender = scanner.nextLine();
+        }
+
         this.health = health;
         this.gender = gender;
         this.animalType = animalType;

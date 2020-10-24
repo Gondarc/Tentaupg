@@ -8,6 +8,12 @@ public class Game {
     int rounds;
     ArrayList<Player> playerList = new ArrayList<>();
 
+    private void winner() {
+        playerList.sort((Player a, Player b) -> {
+            return a.money > b.money ? -1 : 1;
+        });
+    }
+
     private void createPlayers() {
         System.out.println(" - How many players will play?");
         System.out.println(" - Choose from 1, 2, 3 or 4.");
@@ -77,6 +83,18 @@ public class Game {
                     Store.whatToDO(player);
                     player.decreaseAnimalsHealth();
                 }
+            }
+        }
+        for (var player : playerList) {
+            Player.sellAllAnimals(player);
+        }
+        winner();
+        for (var player : playerList) {
+            switch (playerList.indexOf(player)) {
+                case 0 -> System.out.println(player.playerName + " Is the winner!");
+                case 1 -> System.out.println(player.playerName + " Came in on second place!");
+                case 2 -> System.out.println(player.playerName + " Third but not last");
+                case 3 -> System.out.println(player.playerName + " Poor " + player.playerName);
             }
         }
     }

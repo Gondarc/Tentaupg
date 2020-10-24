@@ -271,11 +271,11 @@ public class Store {
                 case 5 -> newAnimal = Bear.createBear();
             }
             player.money -= cost;
-            player.animalList.add(newAnimal);
-            switch (Dialogs.promptInt(
-                    " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)){
-                case 1 -> buyAnimal(player);
-            }
+                player.animalList.add(newAnimal);
+                switch (Dialogs.promptInt(
+                        " - Buy more animal's?\n - (1) Buy more\n - (2) Continue to next player", 1, 2)) {
+                    case 1 -> buyAnimal(player);
+                }
         } else {
             System.out.println("Not enough money, maybe sell an animal?");
             whatToDO(player);
