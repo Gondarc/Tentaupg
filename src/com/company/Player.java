@@ -14,6 +14,14 @@ public class Player {
         this.money = money;
     }
 
+    static void sellAll(Player player){
+        for (var animal : player.animalList) {
+            var animalWorth = (animal.price * animal.health) / 100;
+            System.out.println(animalWorth);
+            player.money += animalWorth;
+        }
+    }
+
     public void decreaseAnimalsHealth(){
         var deadAnimals = new ArrayList<Animal>();
         // Decrease the health for each of the players animal

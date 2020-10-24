@@ -22,21 +22,14 @@ public class Game {
         }
     }
 
-    private void displayAllPlayers(){
-        for (var player: playerList) {
-            System.out.println(player.playerName);
-        }
-    }
-
-    private void setRounds(){
+    private void setRounds() {
         int minRound = 5;
         int maxRound = 30;
         System.out.println(" - How many rounds do you which to play? (5-30)");
         rounds = scanner.nextInt();
-        if (rounds >= 5 && rounds <= 30){
+        if (rounds >= 5 && rounds <= 30) {
             System.out.println(" - Let's play " + rounds + " rounds!");
-        }
-        else {
+        } else {
             System.out.println(" - you have one more try to write an number between 5-30 or I will randomize one for you!");
             rounds = scanner.nextInt();
             if (rounds >= 5 && rounds <= 30) {
@@ -48,7 +41,7 @@ public class Game {
         }
     }
 
-    private void playAgain(){
+    private void playAgain() {
         /*
         var newGame = Dialogs.promptInt("Play again?", 1, 2);
         switch (newGame){
@@ -60,16 +53,30 @@ public class Game {
         //spela igen = samma spelare eller inte?
     }
 
-    public Game(){
+    public Game() {
         createPlayers();
         setRounds();
-        displayAllPlayers(); /* medot mest för att se att det funkar */
-        for(var round = 1; round <= rounds; round++){
-            for(var player: playerList){
-                System.out.println("\n - ROUND " + round + "/" + rounds);
-                System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
-                Store.whatToDO(player);
-                player.decreaseAnimalsHealth();
+        for (var round = 1; round <= rounds; round++) {
+            Iterator<Player> itr = playerList.iterator();
+            while (itr.hasNext()) {
+                Player player = itr.next();
+                if (player.money <= 0) {
+                    itr.remove();
+                } else {
+                    System.out.println("\n - ROUND " + round + "/" + rounds);
+                    System.out.println(" - PLAYER: " + player.playerName + " Currency: " + player.money);
+                    System.out.println(" - ANIMALS: ");
+                    for (var animal : player.animalList) {
+                        System.out.println(" - [" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+                    }
+                    System.out.print(" - FOOD: ");
+                    for (var food : player.foodList) {
+                        System.out.print("[" + food.foodName + "]");
+                    }
+                    System.out.println("");
+                    Store.whatToDO(player);
+                    player.decreaseAnimalsHealth();
+                }
             }
         }
     }
