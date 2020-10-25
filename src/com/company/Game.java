@@ -91,10 +91,10 @@ public class Game {
         winner();
         for (var player : playerList) {
             switch (playerList.indexOf(player)) {
-                case 0 -> System.out.println(player.playerName + " Is the winner!");
-                case 1 -> System.out.println(player.playerName + " Came in on second place!");
-                case 2 -> System.out.println(player.playerName + " Third but not last");
-                case 3 -> System.out.println(player.playerName + " Poor " + player.playerName);
+                case 0 -> System.out.println(" - " + player.playerName + " is the winner! (" + player.money + ")");
+                case 1 -> System.out.println(" - " + player.playerName + " came in on second place! (" + player.money + ")");
+                case 2 -> System.out.println(" - " + player.playerName + " third but not last (" + player.money + ")");
+                case 3 -> System.out.println(" - Poor " + player.playerName + " came in last (" + player.money + ")");
             }
         }
     }

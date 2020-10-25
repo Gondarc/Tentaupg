@@ -14,106 +14,107 @@ public class Store {
         int i = 0;
         int j = 0;
         if (player.animalList.size() >= 2) {
-        System.out.println(" - Which animal do you wish too breed?");
+            System.out.println(" - Which animal do you wish too breed?");
             for (var animal : player.animalList) {
                 System.out.println(" - (" + i + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
                 i++;
+            }
+
+            firstAnimal = player.animalList.get(scanner.nextInt());
+            System.out.println(" - Choose your second animal to breed " + firstAnimal.name + " with");
+            for (var animal : player.animalList) {
+                System.out.println(" - (" + j + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
+                j++;
+            }
+
+            var breedPreferences = new HashMap<String, String>();
+            breedPreferences.put("Pig", "Pig");
+            breedPreferences.put("Chicken", "Chicken");
+            breedPreferences.put("Moose", "Moose");
+            breedPreferences.put("Crocodile", "Crocodile");
+            breedPreferences.put("Bear", "Bear");
+            int breedSuccess = (1) + (int) (Math.random() * (2 - 1 + 1));
+            var animalsCanBreed = breedPreferences.get(firstAnimal.animalType);
+            secondAnimal = player.animalList.get(scanner.nextInt());
+            if (firstAnimal != secondAnimal) {
+                if (animalsCanBreed.contains(secondAnimal.animalType)) {
+                    if (animalsCanBreed.contains("Pig")) {
+                        if (breedSuccess == 1) {
+                            System.out.println(" - Breed success");
+                            int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
+                            System.out.println("You got " + randomNmb + " new pigs");
+                            for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                                newAnimal = Pig.breedPig();
+                                player.animalList.add(newAnimal);
+                            }
+                        } else {
+                            System.out.println(" - Unfortunately the breeding didn't succeed");
+                        }
+                    }
+                    if (animalsCanBreed.contains("Chicken")) {
+                        if (breedSuccess == 1) {
+                            System.out.println(" - Breed success");
+                            int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
+                            System.out.println("You got " + randomNmb + " new chickens");
+                            for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                                newAnimal = Chicken.breedChicken();
+                                player.animalList.add(newAnimal);
+                            }
+                        } else {
+                            System.out.println(" - Unfortunately the breeding didn't succeed");
+                        }
+                    }
+                    if (animalsCanBreed.contains("Crocodile")) {
+                        if (breedSuccess == 1) {
+                            System.out.println(" - Breed success");
+                            int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
+                            System.out.println("You got " + randomNmb + " new crocodiles");
+                            for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                                newAnimal = Crocodile.breedCrocodile();
+                                player.animalList.add(newAnimal);
+                            }
+                        } else {
+                            System.out.println(" - Unfortunately the breeding didn't succeed");
+                        }
+                    }
+                    if (animalsCanBreed.contains("Moose")) {
+                        if (breedSuccess == 1) {
+                            System.out.println(" - Breed success");
+                            int randomNmb = (1) + (int) (Math.random() * (2 - 1 + 1));
+                            System.out.println("You got " + randomNmb + " new moose");
+                            for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                                newAnimal = Moose.breedMoose();
+                                player.animalList.add(newAnimal);
+                            }
+                        } else {
+                            System.out.println(" - Unfortunately the breeding didn't succeed");
+                        }
+                    }
+                    if (animalsCanBreed.contains("Bear")) {
+                        if (breedSuccess == 1) {
+                            System.out.println(" - Breed success");
+                            int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
+                            System.out.println("You got " + randomNmb + " new bears");
+                            for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
+                                newAnimal = Bear.breedBear();
+                                player.animalList.add(newAnimal);
+                            }
+                        } else {
+                            System.out.println(" - Unfortunately the breeding didn't succeed");
+                        }
+                    }
+                } else {
+                    System.out.println(" - You cant breed a " + firstAnimal.animalType + " with a " + secondAnimal.animalType);
+                    breedAnimal(player);
+                }
+            } else {
+                System.out.println(" - You cant breed " + firstAnimal.name + " with " + secondAnimal.name);
+                breedAnimal(player);
             }
         } else {
             System.out.println(" - You have less then 2 animals, which tells me you cant breed anything... yet!");
             System.out.println(" - I recommend buying more animals so you can start breeding!");
             whatToDO(player);
-        }
-        firstAnimal = player.animalList.get(scanner.nextInt());
-        System.out.println(" - Choose your second animal to breed " + firstAnimal.name + " with");
-        for (var animal : player.animalList) {
-            System.out.println(" - (" + j + ")[" + animal.animalType + "][" + animal.name + "][" + animal.gender + "][Health: " + animal.health + "]");
-            j++;
-        }
-
-        var breedPreferences = new HashMap<String, String>();
-        breedPreferences.put("Pig", "Pig");
-        breedPreferences.put("Chicken", "Chicken");
-        breedPreferences.put("Moose", "Moose");
-        breedPreferences.put("Crocodile", "Crocodile");
-        breedPreferences.put("Bear", "Bear");
-        int breedSuccess = (1) + (int) (Math.random() * (2 - 1 + 1));
-        var animalsCanBreed = breedPreferences.get(firstAnimal.animalType);
-        secondAnimal = player.animalList.get(scanner.nextInt());
-        if (firstAnimal != secondAnimal) {
-            if (animalsCanBreed.contains(secondAnimal.animalType)) {
-                if (animalsCanBreed.contains("Pig")) {
-                    if (breedSuccess == 1) {
-                        System.out.println(" - Breed success");
-                        int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
-                        System.out.println("You got " + randomNmb + " new pigs");
-                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                            newAnimal = Pig.breedPig();
-                            player.animalList.add(newAnimal);
-                        }
-                    } else {
-                        System.out.println(" - Unfortunately the breeding didn't succeed");
-                    }
-                }
-                if (animalsCanBreed.contains("Chicken")) {
-                    if (breedSuccess == 1) {
-                        System.out.println(" - Breed success");
-                        int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
-                        System.out.println("You got " + randomNmb + " new chickens");
-                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                            newAnimal = Chicken.breedChicken();
-                            player.animalList.add(newAnimal);
-                        }
-                    } else {
-                        System.out.println(" - Unfortunately the breeding didn't succeed");
-                    }
-                }
-                if (animalsCanBreed.contains("Crocodile")) {
-                    if (breedSuccess == 1) {
-                        System.out.println(" - Breed success");
-                        int randomNmb = (1) + (int) (Math.random() * (6 - 1 + 1));
-                        System.out.println("You got " + randomNmb + " new crocodiles");
-                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                            newAnimal = Crocodile.breedCrocodile();
-                            player.animalList.add(newAnimal);
-                        }
-                    } else {
-                        System.out.println(" - Unfortunately the breeding didn't succeed");
-                    }
-                }
-                if (animalsCanBreed.contains("Moose")) {
-                    if (breedSuccess == 1) {
-                        System.out.println(" - Breed success");
-                        int randomNmb = (1) + (int) (Math.random() * (2 - 1 + 1));
-                        System.out.println("You got " + randomNmb + " new moose");
-                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                            newAnimal = Moose.breedMoose();
-                            player.animalList.add(newAnimal);
-                        }
-                    } else {
-                        System.out.println(" - Unfortunately the breeding didn't succeed");
-                    }
-                }
-                if (animalsCanBreed.contains("Bear")) {
-                    if (breedSuccess == 1) {
-                        System.out.println(" - Breed success");
-                        int randomNmb = (1) + (int) (Math.random() * (3 - 1 + 1));
-                        System.out.println("You got " + randomNmb + " new bears");
-                        for (int randomInt = 0; randomInt < randomNmb; randomInt++) {
-                            newAnimal = Bear.breedBear();
-                            player.animalList.add(newAnimal);
-                        }
-                    } else {
-                        System.out.println(" - Unfortunately the breeding didn't succeed");
-                    }
-                }
-            } else {
-                System.out.println(" - You cant breed a " + firstAnimal.animalType + " with a " + secondAnimal.animalType);
-                breedAnimal(player);
-            }
-        } else {
-            System.out.println(" - You cant breed " + firstAnimal.name + " with " + secondAnimal.name);
-            breedAnimal(player);
         }
     }
 
